@@ -52,6 +52,9 @@ end
 # Perform Data Analysis #
 #########################
 
-ffl = FflScraper.new("http://games.espn.go.com/ffl/leaders?leagueId=978650&teamId=1&scoringPeriodId=1&seasonId=2013")
-
-ap ffl.scrape
+if ARGV.size == 1
+	ffl = FflScraper.new(ARGV.first)
+	ap ffl.scrape
+else
+	puts "Please enter a valid FFL URL for data entry."
+end
