@@ -13,7 +13,7 @@ class FflScraper
 		"VD" => "Blow and Go", 
 		"TheU" => "The Untouchables", 
 		"GTL" => "The Galloping Guidos", 
-		"V$" => "Show Me The V-Money". 
+		"V$" => "Show Me The V-Money", 
 		"Soze" => "Keyser Soze", 
 		"TSM" => "The Sugermen",
 		"GF1" => "G Force 1",
@@ -47,6 +47,18 @@ class FflScraper
 		[str]
 	end
 
+	def format_team_owner(short_form_name)
+
+		if (!TEAM_NAMES[short_form_name].nil?)
+			[TEAM_NAMES[short_form_name]]
+		else
+			["Free Agent"]
+		end
+
+	end
+
+
+
 	# Collect column information, formatting the first row.
 	def aggregate_col_data(row)
 		data_cols  = (1..NUM_COL).reject{|i| REJECT.include?(i)}.compact
@@ -54,7 +66,17 @@ class FflScraper
 		format_first_col(row)
 			.concat(
 				data_cols.collect do |col|
-					doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text  
+
+					#column 2 holds the team owner value:
+					if col == 2
+						format_team_owner(doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text)
+
+					else
+						doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text  
+					
+					end
+
+
 				end).join(",")
 	end
 
