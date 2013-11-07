@@ -53,6 +53,10 @@ end
 # Perform Data Analysis #
 #########################
 
+# Example call via command line:
+#
+# ruby ffl_scraper.rb ruby ffl_scraper.rb "http://games.espn.go.com/ffl/leaders?leagueId=978650&teamId=1&scoringPeriodId=1&seasonId=2013"
+
 if ARGV.size == 1
 	ffl = FflScraper.new(ARGV.first)
 	ap ffl.scrape
