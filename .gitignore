@@ -1,0 +1,7 @@
+*.sw?
+*.un~
+
+.DS_Store
+*DS_Store
+
+cron.log
