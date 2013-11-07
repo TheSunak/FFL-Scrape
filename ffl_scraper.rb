@@ -16,6 +16,7 @@ class FflScraper
 		@tot_rec = doc.css('div.games-fullcol').css('table').css('tr').count - 1
 	end
 
+	# Scrape information across all relevant records.
 	def scrape
 		(2..tot_rec).collect do |row|
 			aggregate_col_data(row)
@@ -35,6 +36,7 @@ class FflScraper
 		[str]
 	end
 
+	# Collect column information, formatting the first row.
 	def aggregate_col_data(row)
 		data_cols  = (1..NUM_COL).reject{|i| REJECT.include?(i)}.compact
 
@@ -46,7 +48,6 @@ class FflScraper
 	end
 
 end
-
 
 #########################
 # Perform Data Analysis #
