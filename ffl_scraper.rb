@@ -42,22 +42,14 @@ class FflScraper
 
 		[name,team,posn]
 
-	# Data may not be in standard form (e.g. ", ")
+	# Error means team is present.
 	rescue NoMethodError => e
-		[str]
+		[name.split(" ").first.upcase,"",""]
 	end
 
 	def format_team_owner(short_form_name)
-
-		if (!TEAM_NAMES[short_form_name].nil?)
-			[TEAM_NAMES[short_form_name]]
-		else
-			["Free Agent"]
-		end
-
+		TEAM_NAMES[short_form_name] || ["Free Agent"]
 	end
-
-
 
 	# Collect column information, formatting the first row.
 	def aggregate_col_data(row)
@@ -66,17 +58,8 @@ class FflScraper
 		format_first_col(row)
 			.concat(
 				data_cols.collect do |col|
-
-					#column 2 holds the team owner value:
-					if col == 2
-						format_team_owner(doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text)
-
-					else
-						doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text  
-					
-					end
-
-
+					text = doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text
+					col == 2 ? format_team_owner(text) : text 
 				end).join(",")
 	end
 
