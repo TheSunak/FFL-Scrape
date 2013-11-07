@@ -92,7 +92,7 @@ end
 
 if ARGV.size == 1
 	ffl = FflScraper.new(ARGV.first)
-	ap ffl.scrape
+	puts ffl.scrape
 else
 	puts "Please enter a valid FFL URL for data entry."
 end
