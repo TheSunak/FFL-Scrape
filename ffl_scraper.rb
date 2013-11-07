@@ -25,21 +25,24 @@ class FflScraper
 	def format_first_col(row)
 		str = doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[0].text  
 		
-		puts str
-
 		name, str  = str.split(", ")
 		team, posn = str.split(/\W/).reject(&:empty?)
 
 		[name,team,posn]
+
+	# Data may not be in standard form (e.g. ", ")
+	rescue NoMethodError => e
+		[str]
 	end
 
 	def aggregate_col_data(row)
 		data_cols  = (1..NUM_COL).reject{|i| REJECT.include?(i)}.compact
 
 		format_first_col(row)
-			.concat(data_cols.collect do |col|
-								doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text  
-							end).join(",")
+			.concat(
+				data_cols.collect do |col|
+					doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text  
+				end).join(",")
 	end
 
 end
