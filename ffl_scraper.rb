@@ -47,16 +47,11 @@ class FflScraper
 
 end
 
-#for row in 2..total_records-1
-	# for col in 0..20
-	#   ap pulled_row_data = doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[col].text  
-	# end
-#end
 
 #########################
 # Perform Data Analysis #
 #########################
 
 ffl = FflScraper.new("http://games.espn.go.com/ffl/leaders?leagueId=978650&teamId=1&scoringPeriodId=1&seasonId=2013")
-# ap ffl.aggregate_col_data(2)
+
 ap ffl.scrape
