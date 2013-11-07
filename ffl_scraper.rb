@@ -8,6 +8,17 @@ class FflScraper
 
 	NUM_COL = 26
 	REJECT  = [1,3,4,7,12,16,21,25]
+
+	TEAM_NAMES = { "LOS" => "League of Shadows",
+		"VD" => "Blow and Go", 
+		"TheU" => "The Untouchables", 
+		"GTL" => "The Galloping Guidos", 
+		"V$" => "Show Me The V-Money". 
+		"Soze" => "Keyser Soze", 
+		"TSM" => "The Sugermen",
+		"GF1" => "G Force 1",
+		"Q" => "Vitamin Q",
+		"FT" => "Foot Throat"}
 	
 	attr_reader :doc, :tot_rec
 
