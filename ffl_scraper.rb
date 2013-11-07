@@ -34,6 +34,8 @@ class FflScraper
 		end
 	end
 
+	private
+
 	def format_first_col(row)
 		str = doc.css('div.games-fullcol').css('table').css('tr')[row].css('td')[0].text  
 		
